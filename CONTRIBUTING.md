@@ -61,7 +61,7 @@ python3 skills/amazon-ops-resume/scripts/build_resume.py \
 python3 skills/amazon-ops-interview/scripts/score_session.py \
   examples/fictional-interview/session.json
 
-python3 -m unittest tests/test_alpha5.py
+python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
 同时检查：
@@ -70,6 +70,8 @@ python3 -m unittest tests/test_alpha5.py
 - `.codex-plugin/plugin.json` 仍是合法 JSON，版本与发布包一致；
 - 打包内容不含 `.DS_Store`、`__MACOSX`、`__pycache__`、`.pyc`、个人文件或凭证；
 - 示例和测试中没有行业硬编码、真实身份信息或可识别商业数据。
+
+GitHub Actions 会在 push 和 Pull Request 上自动执行同一组核心验证。CI 失败时，应先修复验证问题再合并。
 
 ## Issue 与 Pull Request
 

@@ -11,11 +11,7 @@ Its early methodology and architecture were materially informed by the open-sour
 
 `ASu-skills` introduced and developed several ideas that influenced the early direction of this project, including evidence-constrained career reframing, shared claim/evidence baselines across Skills, responsibility boundaries, and the separation of individual contribution from team outcomes.
 
-`ASu-skills` is distributed under the MIT License.
-
-Copyright (c) 2026 Hisn00w
-
-Applicable upstream copyright and license notices should be preserved in accordance with the MIT License.
+`ASu-skills` is distributed under the MIT License. Its upstream copyright and license text is preserved in [`licenses/ASu-skills-MIT.txt`](licenses/ASu-skills-MIT.txt).
 
 ## Independent development and extension
 
@@ -52,9 +48,9 @@ Where upstream or third-party material is incorporated into this repository, the
 
 ## Repository license
 
-The licensing terms for this repository are defined in the root `LICENSE` file.
+The licensing terms for original repository content are defined in the root [`LICENSE`](LICENSE) file.
 
-Where an upstream or third-party component carries separate license terms, those terms continue to apply to that component.
+Where an upstream or third-party component carries separate license terms, those terms continue to apply to that component. Preserved third-party license texts are stored under `licenses/` where applicable.
 
 ## No platform affiliation
 

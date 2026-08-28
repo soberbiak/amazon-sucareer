@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Regression checks for the v0.3.0-alpha.5 clean frontend architecture."""
+"""Regression checks for the repository contract."""
 
 from __future__ import annotations
 
-import json
 import importlib.util
+import json
 import re
 import unittest
 from pathlib import Path
@@ -13,11 +13,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-class AlphaFiveContract(unittest.TestCase):
+class RepositoryContract(unittest.TestCase):
     def test_manifest_and_frozen_structure(self) -> None:
         manifest = json.loads((ROOT / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertEqual(manifest["name"], "amazon-ops-career-skills")
-        self.assertEqual(manifest["version"], "0.3.0-alpha.5")
+        version = manifest["version"]
+        self.assertRegex(version, r"^0\.3\.0-alpha\.\d+$")
+        self.assertIn(f"当前版本：`{version}`", readme)
         expected_skills = {
             "amazon-ops-evidence", "amazon-ops-profile", "amazon-ops-jd",
             "amazon-ops-resume", "amazon-ops-resume-audit", "amazon-ops-interview",
@@ -105,13 +108,15 @@ class AlphaFiveContract(unittest.TestCase):
         contributing = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
         acknowledgements = (ROOT / "ACKNOWLEDGEMENTS.md").read_text(encoding="utf-8")
         license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
+        upstream_license = (ROOT / "licenses/ASu-skills-MIT.txt").read_text(encoding="utf-8")
         self.assertIn("ACKNOWLEDGEMENTS.md", readme)
         self.assertIn("CONTRIBUTING.md", readme)
         self.assertIn("MIT License", readme)
         self.assertIn("七个 Skill", contributing)
         self.assertIn("fictional: true", contributing)
         self.assertIn("独立开源项目", acknowledgements)
-        self.assertIn("SPDX-License-Identifier: MIT", license_text)
+        self.assertIn("Permission is hereby granted, free of charge", license_text)
+        self.assertIn("Copyright (c) 2026 Hisn00w", upstream_license)
         for path in (
             ROOT / "skills/amazon-ops-jd/SKILL.md",
             ROOT / "skills/amazon-ops-resume-audit/SKILL.md",
