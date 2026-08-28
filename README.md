@@ -254,7 +254,8 @@ amazon-ops-career-skills/
 ├── tests/               # 标准库回归测试
 ├── CONTRIBUTING.md      # 贡献流程与内容边界
 ├── PRIVACY.md           # 公开数据与隐私规则
-├── ACKNOWLEDGEMENTS.md  # 致谢与商标说明
+├── ACKNOWLEDGEMENTS.md  # 致谢、来源与商标说明
+├── NOTICE.md            # 上游来源与许可边界
 └── LICENSE              # MIT
 ```
 
@@ -306,9 +307,13 @@ python3 -m unittest tests/test_alpha5.py
 
 欢迎提交可复现的 bug 报告、指标定义改进、验证规则、原创模板和从零合成的测试样例。提交前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，并严格遵守 [PRIVACY.md](PRIVACY.md)。
 
+## Project origin
+
+本项目的早期方法论与架构探索受到 [Hisn00w/ASu-skills](https://github.com/Hisn00w/ASu-skills) 的重要启发，并在此基础上针对 Amazon / 跨境电商运营招聘场景进行了独立重构与工程化扩展。详细来源、上游许可与项目关系说明见 [NOTICE.md](NOTICE.md) 与 [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md)。
+
 ## 致谢
 
-本项目的开源边界、技术与商标说明见 [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md)。
+项目来源、开源边界、技术与商标说明见 [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md)；上游来源与许可边界见 [NOTICE.md](NOTICE.md)。
 
 ## 许可
 
