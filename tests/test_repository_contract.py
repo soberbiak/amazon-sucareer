@@ -115,7 +115,7 @@ class RepositoryContract(unittest.TestCase):
         self.assertIn("七个 Skill", contributing)
         self.assertIn("fictional: true", contributing)
         self.assertIn("独立开源项目", acknowledgements)
-        self.assertIn("SPDX-License-Identifier: MIT", license_text)
+        self.assertIn("Permission is hereby granted, free of charge", license_text)
         self.assertIn("Copyright (c) 2026 Hisn00w", upstream_license)
         for path in (
             ROOT / "skills/amazon-ops-jd/SKILL.md",
