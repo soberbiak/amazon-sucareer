@@ -1,0 +1,29 @@
+name: Feature request
+description: Propose a workflow, rule, validator, or documentation improvement
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Privacy warning:** Keep all examples synthetic. Do not include real resumes, employer/store/brand names, ASIN/SKU, internal metrics, screenshots, credentials, or other identifying business data.
+  - type: textarea
+    id: need
+    attributes:
+      label: User need
+      description: What problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the smallest useful change.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence_boundary
+    attributes:
+      label: Evidence / privacy boundary
+      description: Explain how the proposal avoids creating unsupported claims or exposing real data.
+    validations:
+      required: true
