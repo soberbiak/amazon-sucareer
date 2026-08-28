@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate evidence fixture
+        run: python3 skills/amazon-ops-evidence/scripts/validate_ledger.py examples/fictional-experienced/claim-ledger.json
+
+      - name: Validate profile fixture
+        run: python3 skills/amazon-ops-profile/scripts/validate_profile.py examples/fictional-experienced/profile.json examples/fictional-experienced/claim-ledger.json
+
+      - name: Build experienced resume fixture
+        run: python3 skills/amazon-ops-resume/scripts/build_resume.py examples/fictional-experienced/resume.json /tmp/experienced-resume.html
+
+      - name: Score interview fixture
+        run: python3 skills/amazon-ops-interview/scripts/score_session.py examples/fictional-interview/session.json
+
+      - name: Run regression tests
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
