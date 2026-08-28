@@ -41,6 +41,14 @@ Amazon 运营求职材料常常散落在旧简历、周报、复盘、广告报�
 
 如果你只需要通用中文润色、与 Amazon 运营无关的简历，或希望 AI 补全虚构经历，本项目并不适合。
 
+## 下载
+
+推荐从 [GitHub Releases](https://github.com/soberbiak/amazon-sucareer/releases) 获取最新发布版本。
+
+当前预发布版本：`v0.3.0-alpha.6`
+
+普通使用者请优先下载 Release Assets 中的 `amazon-sucareer-*.zip`；GitHub 自动生成的 `Source code (zip)` / `Source code (tar.gz)` 主要用于查看对应版本的源码快照。
+
 ## 工作方式
 
 项目以七层 Experience Reframing 模型组织职业叙事：
@@ -233,7 +241,7 @@ Open HTML → 检查内容、字号、照片与预览线 → Print / 打印 → 
 
 仓库根目录包含 `.codex-plugin/plugin.json`，各 Skill 位于 `skills/` 下。推荐方式：
 
-1. 下载 Release ZIP 或 clone 本仓库；
+1. 前往 [Releases](https://github.com/soberbiak/amazon-sucareer/releases) 下载最新版本的 `amazon-sucareer-*.zip`，或 clone 本仓库；
 2. 保持目录结构完整，不要只复制单个模板或单个 `SKILL.md`；
 3. 在支持 Codex Skills / plugin manifest 的运行环境中，将仓库根目录作为插件或 Skill 来源加载；
 4. 加载成功后，以 `$amazon-ops-evidence`、`$amazon-ops-resume` 等名称调用。
