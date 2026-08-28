@@ -6,7 +6,7 @@
 
 它的目标不是把经历“写得更厉害”，而是在不改变事实的前提下，让真实的运营工作被准确理解、清晰表达和经得起追问。
 
-当前版本：`0.3.0-alpha.5`
+当前版本：`0.3.0-alpha.6`
 
 ## 它解决什么问题
 
@@ -292,7 +292,7 @@ python3 -m unittest tests/test_alpha5.py
 
 ## 当前状态与边界
 
-`0.3.0-alpha.5` 已完成：
+`0.3.0-alpha.6` 已完成：
 
 - Evidence → Reframing → Profile 的核心链路；
 - 统一 Ledger v2.0 与共享规则；
