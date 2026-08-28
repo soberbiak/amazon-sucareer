@@ -1,0 +1,41 @@
+{
+  "fictional": true,
+  "candidate_ref": "fictional-interview-01",
+  "mode": "experienced",
+  "claims": [
+    {
+      "claim_id": "C-004",
+      "statement": "14周内180天以上库存件数占比由27.8%降至16.4%。",
+      "scores": {
+        "specificity": 4,
+        "evidence": 3,
+        "ownership": 3,
+        "mechanism": 3,
+        "trade_offs": 2,
+        "reflection": 3,
+        "communication": 4
+      },
+      "gaps": [
+        "evidence_gap"
+      ]
+    },
+    {
+      "claim_id": "C-005",
+      "statement": "广告优化使ACoS由33.6%降至28.9%。",
+      "scores": {
+        "specificity": 2,
+        "evidence": 2,
+        "ownership": 1,
+        "mechanism": 2,
+        "trade_offs": 1,
+        "reflection": 2,
+        "communication": 2
+      },
+      "gaps": [
+        "ownership_gap",
+        "claim_risk",
+        "metric_gap"
+      ]
+    }
+  ]
+}

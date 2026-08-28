@@ -1,0 +1,182 @@
+{
+  "schema_version": "2.0",
+  "fictional": true,
+  "candidate_ref": "fictional-experienced-01",
+  "target_track": "experienced",
+  "sources": [
+    {
+      "source_id": "S-001",
+      "type": "synthetic_weekly_review",
+      "label": "虚构的库存周复盘",
+      "date": "2025-11-21"
+    },
+    {
+      "source_id": "S-002",
+      "type": "synthetic_campaign_export",
+      "label": "虚构的广告汇总表",
+      "date": "2025-12-31"
+    },
+    {
+      "source_id": "S-003",
+      "type": "synthetic_role_note",
+      "label": "虚构的职责访谈记录",
+      "date": "2026-01-08"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C-001",
+      "claim_type": "scope",
+      "source_fact": "候选人共同负责北美站虚构成熟产品组合的周度经营复盘，范围为18个在售子体。",
+      "candidate_interpretation": "具备产品组经营复盘的共同责任。",
+      "resume_candidate_statement": "共同负责产品组周度经营复盘。",
+      "source_ids": ["S-003"],
+      "evidence_status": "verified",
+      "responsibility": "co_owner",
+      "scope": "北美站；虚构成熟产品组合；18个在售子体",
+      "period": "2025-08至2025-12",
+      "metrics": [],
+      "dependencies": ["补货负责人", "广告专员"],
+      "attribution": {"strength": "contributed", "alternative_drivers": []},
+      "causality": {"status": "not_applicable", "mechanism": "", "confounders": []},
+      "confidence": {"level": "high", "reason": "职责访谈记录直接支持范围和共同责任。"},
+      "confidentiality": "public_safe",
+      "operating_mechanisms": ["weekly business review"],
+      "competencies": ["marketplace operations", "data and analytics"],
+      "business_values": ["decision quality"],
+      "jd_relevance": [],
+      "interview_risk": "low",
+      "notes": "虚构测试声明。"
+    },
+    {
+      "claim_id": "C-002",
+      "claim_type": "problem",
+      "source_fact": "产品组中库龄超过180天的库存占比在复盘起点为27.8%。",
+      "candidate_interpretation": "产品组存在明确的库龄治理问题。",
+      "resume_candidate_statement": "识别产品组高库龄库存风险。",
+      "source_ids": ["S-001"],
+      "evidence_status": "verified",
+      "responsibility": "co_owner",
+      "scope": "同一产品组；按库存件数计算",
+      "period": "2025-08-15快照",
+      "metrics": [
+        {
+          "name": "inventory_age_share_over_180d",
+          "unit": "% of units",
+          "baseline": 27.8,
+          "result": null,
+          "direction": "lower_is_better",
+          "window": "2025-08-15",
+          "method": "超过180天库存件数 / 产品组库存总件数"
+        }
+      ],
+      "dependencies": ["既有采购批量", "历史销量波动"],
+      "attribution": {"strength": "observed", "alternative_drivers": ["既有采购批量", "历史销量波动"]},
+      "causality": {"status": "not_applicable", "mechanism": "", "confounders": []},
+      "confidence": {"level": "high", "reason": "同口径库存快照直接支持。"},
+      "confidentiality": "public_safe",
+      "operating_mechanisms": ["inventory age diagnosis"],
+      "competencies": ["inventory and supply chain", "data and analytics"],
+      "business_values": ["working-capital efficiency"],
+      "jd_relevance": [],
+      "interview_risk": "low",
+      "notes": "只陈述起点，不包含归因。"
+    },
+    {
+      "claim_id": "C-003",
+      "claim_type": "mechanism",
+      "source_fact": "候选人按周转与边际贡献将产品分为三档，并建立补货冻结、价格实验和广告降档的周度例外清单。",
+      "candidate_interpretation": "建立了跨库存、价格和广告的例外管理机制。",
+      "resume_candidate_statement": "按周转与边际贡献分层产品，维护周度例外清单并协调处置。",
+      "source_ids": ["S-001", "S-003"],
+      "evidence_status": "verified",
+      "responsibility": "owner",
+      "scope": "同一产品组的库存治理机制",
+      "period": "2025-08至2025-11",
+      "metrics": [],
+      "dependencies": ["补货负责人执行采购调整", "广告专员执行预算变更", "价格实验审批"],
+      "attribution": {"strength": "enabled", "alternative_drivers": ["跨角色执行", "审批"]},
+      "causality": {"status": "plausible", "mechanism": "分层治理改变补货、定价和投放处置优先级。", "confounders": ["自然销售", "需求变化"]},
+      "confidence": {"level": "high", "reason": "周复盘与职责记录共同支持机制所有权。"},
+      "confidentiality": "public_safe",
+      "operating_mechanisms": ["portfolio segmentation", "exception management", "resource prioritization"],
+      "competencies": ["inventory and supply chain", "financial awareness", "project management"],
+      "business_values": ["working-capital efficiency", "resource allocation"],
+      "jd_relevance": [],
+      "interview_risk": "medium",
+      "notes": "机制由候选人提出并维护，具体执行为跨角色协同。"
+    },
+    {
+      "claim_id": "C-004",
+      "claim_type": "result",
+      "source_fact": "14周后，同口径的180天以上库存件数占比由27.8%降至16.4%。",
+      "candidate_interpretation": "治理期间高库龄库存占比下降，但结果为共同产出。",
+      "resume_candidate_statement": "参与推动同口径高库龄库存占比在14周内下降11.4个百分点。",
+      "source_ids": ["S-001"],
+      "evidence_status": "verified",
+      "responsibility": "co_owner",
+      "scope": "同一产品组；按库存件数计算",
+      "period": "2025-08-15至2025-11-21",
+      "metrics": [
+        {
+          "name": "inventory_age_share_over_180d",
+          "unit": "% of units",
+          "baseline": 27.8,
+          "result": 16.4,
+          "direction": "lower_is_better",
+          "window": "14周",
+          "method": "同一范围、同一库龄阈值的周度快照；下降11.4个百分点"
+        }
+      ],
+      "dependencies": ["自然销售消化", "价格实验", "补货冻结", "广告降档"],
+      "attribution": {"strength": "contributed", "alternative_drivers": ["自然销售消化", "价格实验", "补货冻结", "广告降档"]},
+      "causality": {"status": "plausible", "mechanism": "例外清单协调多项库存治理动作。", "confounders": ["自然需求变化"]},
+      "confidence": {"level": "medium", "reason": "结果可信，但各驱动的独立贡献未拆分。"},
+      "confidentiality": "public_safe",
+      "operating_mechanisms": ["inventory exception management"],
+      "competencies": ["inventory and supply chain", "cross-functional collaboration"],
+      "business_values": ["working-capital efficiency"],
+      "jd_relevance": [],
+      "interview_risk": "medium",
+      "notes": "结果为共同产出，不能将全部降幅归因于单一动作。"
+    },
+    {
+      "claim_id": "C-005",
+      "claim_type": "result",
+      "source_fact": "在不降低广告归因销售额的前提下，虚构广告组合的ACoS从33.6%降至28.9%。",
+      "candidate_interpretation": "搜索词建议与广告效率改善同期发生，候选人仅承担贡献者角色。",
+      "resume_candidate_statement": "通过搜索词分层和否词建议支持广告组合ACoS下降4.7个百分点。",
+      "source_ids": ["S-002"],
+      "evidence_status": "verified",
+      "responsibility": "contributor",
+      "scope": "北美站；9个成熟子体；SP广告组合",
+      "period": "2025-Q4前后各四周对比",
+      "metrics": [
+        {
+          "name": "ACoS",
+          "unit": "%",
+          "baseline": 33.6,
+          "result": 28.9,
+          "direction": "lower_is_better",
+          "window": "前后各四周",
+          "method": "广告花费 / 14天归因广告销售额；下降4.7个百分点"
+        }
+      ],
+      "dependencies": ["广告专员执行", "同期价格保持稳定", "库存可售"],
+      "attribution": {"strength": "contributed", "alternative_drivers": ["广告专员执行", "竞价环境"]},
+      "causality": {"status": "correlated", "mechanism": "搜索词分层可能减少低效流量。", "confounders": ["竞价环境", "需求结构"]},
+      "confidence": {"level": "medium", "reason": "指标与动作均有来源，但个人作用未隔离。"},
+      "confidentiality": "public_safe",
+      "operating_mechanisms": ["search-intent matching", "traffic-efficiency control"],
+      "competencies": ["advertising operations"],
+      "business_values": ["traffic efficiency"],
+      "jd_relevance": [],
+      "interview_risk": "high",
+      "notes": "候选人提供搜索词分层和否词建议，不应写成独立主导全部广告优化。"
+    }
+  ],
+  "open_questions": [
+    "库存结果中自然销售、价格实验与补货冻结各自的影响是否有可复核拆分？",
+    "广告对比期的流量结构和竞价环境是否稳定？"
+  ]
+}

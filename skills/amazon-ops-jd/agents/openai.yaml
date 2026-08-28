@@ -1,0 +1,4 @@
+interface:
+  display_name: "Amazon Ops JD"
+  short_description: "Map JD requirements to career evidence"
+  default_prompt: "拆解这份 Amazon 运营 JD，并把要求映射到已有 claim IDs。"

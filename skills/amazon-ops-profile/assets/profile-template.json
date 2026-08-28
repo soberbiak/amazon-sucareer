@@ -1,0 +1,20 @@
+{
+  "candidate_profile": {
+    "operating_scope": {"level": "", "supporting_claim_ids": []},
+    "decision_rights": {"level": "", "supporting_claim_ids": []},
+    "business_ownership": {"areas": [], "supporting_claim_ids": []},
+    "capability_pattern": {"core": [], "supporting": [], "exposure": []},
+    "complexity": {"assessment": "", "supporting_claim_ids": []},
+    "leadership_scope": {"level": "", "supporting_claim_ids": []},
+    "core_competencies": [],
+    "supporting_competencies": [],
+    "exposure_only": [],
+    "evidence_gaps": []
+  },
+  "positioning": {
+    "current": {"role_family": "", "rationale": "", "supporting_claim_ids": []},
+    "stretch": {"role_family": "", "rationale": "", "supporting_claim_ids": [], "evidence_gaps": []},
+    "unsupported": []
+  },
+  "positioning_narrative": ""
+}

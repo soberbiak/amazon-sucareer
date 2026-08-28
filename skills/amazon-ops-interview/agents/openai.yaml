@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amazon Ops Interview"
+  short_description: "从亚马逊运营简历声明生成分层追问、风险审计和可执行补强计划"
+  default_prompt: "Use $amazon-ops-interview to audit my resume claims and run an Amazon operations mock interview."
+policy:
+  allow_implicit_invocation: true

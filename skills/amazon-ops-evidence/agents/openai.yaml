@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amazon Ops Evidence"
+  short_description: "把亚马逊运营素材整理为可追溯、可验证的声明证据账本"
+  default_prompt: "Use $amazon-ops-evidence to turn my Amazon operations material into Career Evidence Ledger v2.0."
+policy:
+  allow_implicit_invocation: true

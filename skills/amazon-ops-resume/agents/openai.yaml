@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amazon Ops Resume"
+  short_description: "为校招或社招生成证据驱动、可编辑的亚马逊运营中文简历"
+  default_prompt: "Use $amazon-ops-resume to build an evidence-based Amazon operations resume in campus or experienced mode."
+policy:
+  allow_implicit_invocation: true

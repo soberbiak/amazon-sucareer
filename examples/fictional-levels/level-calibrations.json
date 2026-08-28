@@ -1,0 +1,73 @@
+{
+  "fictional": true,
+  "snapshot": "2026-08",
+  "profiles": [
+    {
+      "profile_id": "L-001",
+      "relevant_years": 2.2,
+      "target_band": "1-3",
+      "actual_archetype": "operator",
+      "target_archetype": "operator",
+      "calibration": "aligned",
+      "evidence": [
+        "独立负责一个虚构产品组的Listing、PPC与补货周循环",
+        "能说明一次新品推广的基线、调整过程、结果和复盘"
+      ],
+      "missing_for_next_level": [
+        "跨多个生命周期阶段的资源分配证据",
+        "可重复的产品组合机制"
+      ]
+    },
+    {
+      "profile_id": "L-002",
+      "relevant_years": 4.3,
+      "target_band": "3-5",
+      "actual_archetype": "senior_ic",
+      "target_archetype": "senior_ic",
+      "calibration": "aligned",
+      "evidence": [
+        "负责虚构产品线的销售、广告、利润与库存联合复盘",
+        "建立生命周期分层和季度资源调整机制",
+        "推动产品、创意和补货角色落地，但没有正式下属"
+      ],
+      "missing_for_manager_track": [
+        "招聘或人员配置",
+        "目标分配、辅导和绩效责任"
+      ]
+    },
+    {
+      "profile_id": "L-003",
+      "relevant_years": 7.1,
+      "target_band": "5-10",
+      "actual_archetype": "operator",
+      "target_archetype": "manager",
+      "calibration": "title_inflated",
+      "evidence": [
+        "长期独立维护虚构店铺并具备稳定执行能力"
+      ],
+      "missing_for_target": [
+        "年度或季度经营规划",
+        "利润与资源分配责任",
+        "团队目标、辅导和组织机制",
+        "多产品或多市场的组合决策"
+      ],
+      "recommended_positioning": "资深亚马逊运营个人贡献者，不包装成团队负责人"
+    },
+    {
+      "profile_id": "L-004",
+      "relevant_years": 8.0,
+      "target_band": "5-10",
+      "actual_archetype": "business_owner",
+      "target_archetype": "business_owner",
+      "calibration": "aligned",
+      "evidence": [
+        "负责虚构多站点业务的年度目标拆解和月度经营复盘",
+        "对销售、贡献利润、库存与广告预算的联合结果负责",
+        "建立团队目标分配、辅导和异常升级机制"
+      ],
+      "missing_for_next_level": [
+        "更长期的品牌与渠道组合结果"
+      ]
+    }
+  ]
+}

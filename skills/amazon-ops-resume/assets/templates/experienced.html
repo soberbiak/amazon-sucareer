@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <style>
+    @page { size: A4; margin: 8mm 11mm; }
+    :root {
+      --ink: #17191d;
+      --soft-ink: #616873;
+      --accent: #27466f;
+      --accent-soft: #edf2f7;
+      --paper: #ffffff;
+      --workspace: #e9edf2;
+      --line: #d9dee6;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--workspace);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+
+    .editor-shell {
+      width: min(210mm, calc(100vw - 24px));
+      margin: 10px auto 12px;
+    }
+    .editor-panel {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 10px;
+      border: 1px solid #cbd2dc;
+      border-radius: 10px;
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 8px 24px rgba(24, 35, 48, .10);
+      font: 12px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+    .panel-group { display: flex; align-items: center; gap: 6px; min-width: 0; }
+    .panel-group--format { justify-content: center; }
+    .panel-group--actions { justify-content: flex-end; }
+    .panel-label { color: #6b7280; font-weight: 700; margin-right: 2px; }
+    .editor-panel button,
+    .editor-panel select,
+    .editor-panel input[type="color"] {
+      height: 30px;
+      border: 1px solid #cbd2dc;
+      border-radius: 6px;
+      background: #fff;
+      color: #253041;
+      font: inherit;
+    }
+    .editor-panel button { padding: 0 9px; cursor: pointer; }
+    .editor-panel button:hover,
+    .editor-panel select:hover { border-color: #8095b0; }
+    .editor-panel button[data-active="true"] { background: #e8eef6; border-color: #7c93b1; }
+    .editor-panel select { padding: 0 6px; }
+    .editor-panel input[type="color"] { width: 32px; padding: 3px; cursor: pointer; }
+    .export-action { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; font-weight: 700 !important; }
+    .status-text { min-width: 54px; text-align: right; color: #7b8490; }
+
+    .paper-stage { position: relative; margin-top: 10px; }
+    .page-guide-layer {
+      display: none;
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+    body[data-view="paged"] .page-guide-layer { display: block; }
+    .page-guide {
+      position: absolute;
+      left: 0;
+      right: 0;
+      border-top: 1px dashed #b9c2cf;
+    }
+    .page-guide span {
+      position: absolute;
+      right: 8px;
+      top: -18px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #e9edf2;
+      color: #7b8490;
+      font: 10px/1.2 system-ui, sans-serif;
+    }
+    .resume-canvas {
+      --resume-font: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      --resume-size: 10pt;
+      --resume-color: #17191d;
+      position: relative;
+      z-index: 1;
+      width: 210mm;
+      min-height: 120mm;
+      padding: 8mm 11mm;
+      margin: 0 auto;
+      background: var(--paper);
+      color: var(--resume-color);
+      font-family: var(--resume-font);
+      font-size: var(--resume-size);
+      line-height: 1.42;
+      box-shadow: 0 3px 18px rgba(24,35,48,.16);
+      outline: none;
+    }
+    body[data-view="continuous"] { background: #fff; }
+    body[data-view="continuous"] .editor-shell { width: min(210mm, calc(100vw - 24px)); }
+    body[data-view="continuous"] .resume-canvas { box-shadow: none; }
+
+    .identity { margin-bottom: 5mm; }
+    .identity--plain {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(48mm, 36%);
+      gap: 9mm;
+      align-items: start;
+    }
+    .identity--plain .contact-stack { text-align: right; justify-self: end; }
+    .identity--photo {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 26mm;
+      gap: 7mm;
+      align-items: start;
+    }
+    .candidate-name {
+      margin: 0;
+      font: 700 2.22em/1.08 var(--resume-font);
+      letter-spacing: .01em;
+      overflow-wrap: anywhere;
+    }
+    .role-line { margin-top: 2mm; color: #9a5a28; font-weight: 700; font-size: 1.04em; }
+    .contact-stack { margin-top: 1mm; max-width: 72mm; color: var(--soft-ink); font-size: .88em; line-height: 1.42; }
+    .identity-left .contact-stack { max-width: 135mm; }
+    .contact-line { margin: .6mm 0; overflow-wrap: anywhere; }
+
+    .portrait-picker {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: 26mm;
+      height: 34mm;
+      border: 1px solid #b6bec9;
+      border-radius: 3px;
+      background: #f7f8fa;
+      color: #9299a3;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+    }
+    .portrait-picker:hover { border-color: var(--accent); }
+    .portrait-input { display: none; }
+    .portrait-image { width: 100%; height: 100%; object-fit: cover; }
+    .portrait-placeholder { font-size: .78em; }
+    .portrait-picker::after {
+      content: "上传";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 2mm 1mm 1.5mm;
+      text-align: center;
+      background: linear-gradient(transparent, rgba(17,24,39,.7));
+      color: #fff;
+      font-size: .72em;
+      opacity: 0;
+      transition: opacity .15s ease;
+    }
+    .portrait-picker:hover::after { opacity: 1; }
+
+    .overview-card {
+      margin: 0 0 4mm;
+      padding: 3mm 4mm;
+      border: 1px solid #e1e4e9;
+      border-left: 3px solid #9a5a28;
+      border-radius: 4px;
+      background: #faf9f7;
+    }
+    .overview-card p { margin: .7mm 0; }
+
+    .resume-block { margin-top: 3.6mm; }
+    .block-title {
+      margin: 0 0 2mm;
+      padding-bottom: 1.2mm;
+      border-bottom: 1px solid #394b64;
+      color: #253d5d;
+      font: 700 1.26em/1.15 var(--resume-font);
+      break-after: avoid;
+    }
+    .competency-list { display: flex; flex-wrap: wrap; gap: 1.5mm 2mm; }
+    .competency-chip {
+      padding: 1mm 2.2mm;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #304760;
+      font-size: .9em;
+      font-weight: 600;
+    }
+
+    .record { margin: 0 0 3.1mm; break-inside: auto; }
+    .record-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 7mm;
+      align-items: baseline;
+      margin: 0 0 1.3mm;
+      padding: 2mm 3mm;
+      border-radius: 4px;
+      background: #f1f3f6;
+      break-after: avoid;
+    }
+    .record-heading { min-width: 0; overflow-wrap: anywhere; }
+    .record-org { font-weight: 700; }
+    .record-role { margin-left: 1.2mm; color: var(--soft-ink); }
+    .record-role::before { content: "·"; margin-right: 1.2mm; color: #9aa1ab; }
+    .record-meta { max-width: 68mm; color: var(--soft-ink); font-size: .9em; text-align: right; overflow-wrap: anywhere; }
+    .record-note { margin: 0 0 1mm; color: var(--soft-ink); font-size: .94em; break-after: avoid; }
+    .achievement-list { margin: 0; padding-left: 5mm; }
+    .achievement-list li { margin: .8mm 0; break-inside: avoid; }
+    .achievement-list li::marker { color: #516985; font-size: .78em; }
+    strong { font-weight: 700; }
+
+    .demo-note { margin-top: 4mm; padding-top: 2mm; border-top: 1px dashed #d5d9df; color: #9aa1ab; font-size: .78em; text-align: center; }
+
+    .resume-canvas [contenteditable="true"]:focus,
+    .resume-canvas:focus { outline: 2px solid rgba(72, 112, 160, .28); outline-offset: 2px; }
+
+    @media (max-width: 920px) {
+      .editor-panel { grid-template-columns: 1fr; }
+      .panel-group--format, .panel-group--actions { justify-content: flex-start; flex-wrap: wrap; }
+      .resume-canvas { transform-origin: top left; }
+    }
+    @media print {
+      body { background: #fff !important; }
+      .editor-shell { width: auto; margin: 0; }
+      .editor-panel, .page-guide-layer { display: none !important; }
+      .paper-stage { margin: 0; }
+      .resume-canvas { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+      .portrait-picker::after { display: none; }
+    }
+  </style>
+</head>
+<body data-view="paged" data-resume-mode="experienced">
+  <div class="editor-shell">
+    <nav class="editor-panel" aria-label="简历编辑工具">
+      <div class="panel-group">
+        <span class="panel-label">视图</span>
+        <button type="button" data-command="toggle-view" data-active="true">A4 预览线</button>
+        <span class="status-text" data-status>已保存</span>
+      </div>
+      <div class="panel-group panel-group--format">
+        <span class="panel-label">文字</span>
+        <select data-control="font" aria-label="字体">
+          <option value='"Microsoft YaHei", "PingFang SC", Arial, sans-serif'>微软雅黑</option>
+          <option value='"SimSun", "宋体", serif'>宋体</option>
+          <option value='Arial, "Microsoft YaHei", sans-serif'>Arial</option>
+          <option value='"Times New Roman", "SimSun", serif'>Times New Roman</option>
+        </select>
+        <select data-control="size" aria-label="字号">
+          <option value="9.5pt">9.5</option>
+          <option value="10pt" selected>10</option>
+          <option value="10.5pt">10.5</option>
+          <option value="11pt">11</option>
+        </select>
+        <input type="color" data-control="color" value="#17191d" aria-label="正文颜色">
+        <button type="button" data-command="bold" aria-label="加粗"><strong>B</strong></button>
+      </div>
+      <div class="panel-group panel-group--actions">
+        <button type="button" data-command="undo">撤销</button>
+        <button type="button" data-command="redo">重做</button>
+        <button type="button" data-command="reset">重置</button>
+        <button type="button" class="export-action" data-command="print">导出 PDF</button>
+      </div>
+    </nav>
+
+    <div class="paper-stage">
+      <div class="page-guide-layer" aria-hidden="true"></div>
+      <main class="resume-canvas" contenteditable="true" spellcheck="false">{{CONTENT}}</main>
+    </div>
+  </div>
+
+  <script>
+  (() => {
+    'use strict';
+
+    const VERSION = 'amazon-ops-resume-clean-v1';
+    const body = document.body;
+    const canvas = document.querySelector('.resume-canvas');
+    const panel = document.querySelector('.editor-panel');
+    const guideLayer = document.querySelector('.page-guide-layer');
+    const statusNode = document.querySelector('[data-status]');
+    const fontSelect = document.querySelector('[data-control="font"]');
+    const sizeSelect = document.querySelector('[data-control="size"]');
+    const colorInput = document.querySelector('[data-control="color"]');
+    const viewButton = document.querySelector('[data-command="toggle-view"]');
+
+    const initialMarkup = canvas.innerHTML;
+    const initialPhoto = null;
+    const history = { entries: [], cursor: -1, muted: false };
+    let saveTimer = 0;
+
+    const fingerprintSeed = (text) => {
+      let value = 5381;
+      for (let i = 0; i < text.length; i += 1) value = ((value << 5) + value) ^ text.charCodeAt(i);
+      return (value >>> 0).toString(36);
+    };
+
+    const storageKey = `amazon_ops_resume_${body.dataset.resumeMode || 'generic'}_${VERSION}_${fingerprintSeed(initialMarkup.slice(0, 6000))}`;
+
+    const setStatus = (text) => { statusNode.textContent = text; };
+
+    const snapshot = () => ({
+      markup: canvas.innerHTML,
+      font: canvas.style.getPropertyValue('--resume-font') || fontSelect.value,
+      size: canvas.style.getPropertyValue('--resume-size') || sizeSelect.value,
+      color: canvas.style.getPropertyValue('--resume-color') || colorInput.value,
+      view: body.dataset.view || 'paged'
+    });
+
+    const sameSnapshot = (a, b) => a && b && JSON.stringify(a) === JSON.stringify(b);
+
+    const applySnapshot = (state) => {
+      if (!state) return;
+      history.muted = true;
+      canvas.innerHTML = state.markup;
+      canvas.style.setProperty('--resume-font', state.font);
+      canvas.style.setProperty('--resume-size', state.size);
+      canvas.style.setProperty('--resume-color', state.color);
+      fontSelect.value = state.font;
+      sizeSelect.value = state.size;
+      colorInput.value = state.color;
+      body.dataset.view = state.view;
+      viewButton.dataset.active = String(state.view === 'paged');
+      history.muted = false;
+      bindPortrait();
+      refreshGuides();
+    };
+
+    const remember = () => {
+      if (history.muted) return;
+      const state = snapshot();
+      const current = history.entries[history.cursor];
+      if (sameSnapshot(current, state)) return;
+      history.entries = history.entries.slice(0, history.cursor + 1);
+      history.entries.push(state);
+      if (history.entries.length > 80) history.entries.shift();
+      history.cursor = history.entries.length - 1;
+    };
+
+    const persist = () => {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify({ version: VERSION, state: snapshot() }));
+        setStatus('已保存');
+      } catch (_) {
+        setStatus('未保存');
+      }
+    };
+
+    const scheduleSave = () => {
+      setStatus('保存中');
+      clearTimeout(saveTimer);
+      saveTimer = window.setTimeout(() => {
+        remember();
+        persist();
+        refreshGuides();
+      }, 260);
+    };
+
+    const restore = () => {
+      try {
+        const payload = JSON.parse(localStorage.getItem(storageKey) || 'null');
+        if (payload && payload.version === VERSION && payload.state) {
+          applySnapshot(payload.state);
+          return;
+        }
+      } catch (_) {}
+      remember();
+      persist();
+    };
+
+    const mmPx = () => {
+      const probe = document.createElement('div');
+      probe.style.cssText = 'position:absolute;visibility:hidden;width:100mm;height:1px;';
+      document.body.appendChild(probe);
+      const value = probe.getBoundingClientRect().width / 100;
+      probe.remove();
+      return value;
+    };
+
+    const refreshGuides = () => {
+      guideLayer.innerHTML = '';
+      if (body.dataset.view !== 'paged') return;
+      const printableMm = 281;
+      const step = printableMm * mmPx();
+      const height = canvas.scrollHeight;
+      let page = 2;
+      for (let y = step; y < height; y += step) {
+        const marker = document.createElement('div');
+        marker.className = 'page-guide';
+        marker.style.top = `${Math.round(y)}px`;
+        marker.innerHTML = `<span>第 ${page} 页</span>`;
+        guideLayer.appendChild(marker);
+        page += 1;
+      }
+    };
+
+    const bindPortrait = () => {
+      const picker = canvas.querySelector('.portrait-picker');
+      if (!picker || picker.dataset.bound === '1') return;
+      picker.dataset.bound = '1';
+      const input = picker.querySelector('.portrait-input');
+      const image = picker.querySelector('.portrait-image');
+      const placeholder = picker.querySelector('.portrait-placeholder');
+      if (!input || !image || !placeholder) return;
+      input.addEventListener('change', () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+          image.src = String(reader.result || '');
+          image.hidden = false;
+          placeholder.hidden = true;
+          scheduleSave();
+        });
+        reader.readAsDataURL(file);
+      });
+    };
+
+    panel.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-command]');
+      if (!button) return;
+      const command = button.dataset.command;
+
+      if (command === 'toggle-view') {
+        body.dataset.view = body.dataset.view === 'paged' ? 'continuous' : 'paged';
+        button.dataset.active = String(body.dataset.view === 'paged');
+        scheduleSave();
+      } else if (command === 'bold') {
+        canvas.focus();
+        document.execCommand('bold', false);
+        scheduleSave();
+      } else if (command === 'undo') {
+        if (history.cursor > 0) {
+          history.cursor -= 1;
+          applySnapshot(history.entries[history.cursor]);
+          persist();
+        }
+      } else if (command === 'redo') {
+        if (history.cursor < history.entries.length - 1) {
+          history.cursor += 1;
+          applySnapshot(history.entries[history.cursor]);
+          persist();
+        }
+      } else if (command === 'reset') {
+        if (!window.confirm('恢复为初始简历内容？当前编辑会被覆盖。')) return;
+        history.muted = true;
+        canvas.innerHTML = initialMarkup;
+        canvas.style.removeProperty('--resume-font');
+        canvas.style.removeProperty('--resume-size');
+        canvas.style.removeProperty('--resume-color');
+        fontSelect.selectedIndex = 0;
+        sizeSelect.value = '10pt';
+        colorInput.value = '#17191d';
+        body.dataset.view = 'paged';
+        viewButton.dataset.active = 'true';
+        history.muted = false;
+        history.entries = [];
+        history.cursor = -1;
+        bindPortrait();
+        remember();
+        persist();
+        refreshGuides();
+      } else if (command === 'print') {
+        window.print();
+      }
+    });
+
+    fontSelect.addEventListener('change', () => {
+      canvas.style.setProperty('--resume-font', fontSelect.value);
+      scheduleSave();
+    });
+    sizeSelect.addEventListener('change', () => {
+      canvas.style.setProperty('--resume-size', sizeSelect.value);
+      scheduleSave();
+    });
+    colorInput.addEventListener('input', () => {
+      canvas.style.setProperty('--resume-color', colorInput.value);
+      scheduleSave();
+    });
+    canvas.addEventListener('input', scheduleSave);
+    window.addEventListener('resize', refreshGuides);
+
+    bindPortrait();
+    restore();
+    refreshGuides();
+  })();
+  </script>
+</body>
+</html>

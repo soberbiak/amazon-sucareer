@@ -1,0 +1,36 @@
+{
+  "name": "amazon-ops-career-skills",
+  "version": "0.3.0-alpha.5",
+  "description": "Evidence-first Amazon operations career skills with unified evidence, experience reframing, and evidence-backed positioning.",
+  "author": {
+    "name": "Open-source contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "amazon-operations",
+    "resume",
+    "interview",
+    "career-positioning",
+    "campus-recruiting",
+    "experienced-hire"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Amazon Ops Career Skills",
+    "shortDescription": "Build evidence-backed Amazon operations career materials.",
+    "longDescription": "Turn raw Amazon operations material into Career Evidence Ledger v2.0, reframe work without changing facts, derive current and stretch positioning from ownership, and produce defensible resume and interview materials.",
+    "developerName": "Open-source contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "把我的运营素材整理成可核验的证据账本。",
+      "基于证据分析我的 current、stretch 和 unsupported 职业定位。",
+      "用校招模式或社招模式生成亚马逊运营简历。",
+      "根据简历声明追问并检查我是否讲得透。",
+      "生成 Boss直聘 / 微信打招呼语。"
+    ]
+  }
+}

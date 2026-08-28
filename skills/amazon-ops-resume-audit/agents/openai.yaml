@@ -1,0 +1,4 @@
+interface:
+  display_name: "Amazon Ops Resume Audit"
+  short_description: "Audit resume claims against evidence"
+  default_prompt: "逐条审计这份简历与 Career Evidence Ledger，标记 keep、soften、remove 或 recover_evidence。"

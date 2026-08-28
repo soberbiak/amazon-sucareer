@@ -1,0 +1,36 @@
+{
+  "fictional": true,
+  "candidate_profile": {
+    "operating_scope": {"level": "portfolio", "supporting_claim_ids": ["C-001", "C-003"]},
+    "decision_rights": {"level": "decide_within_guardrails", "supporting_claim_ids": ["C-003"]},
+    "business_ownership": {"areas": ["inventory"], "supporting_claim_ids": ["C-003", "C-004"]},
+    "capability_pattern": {
+      "core": ["inventory and supply chain"],
+      "supporting": ["data and analytics", "project management"],
+      "exposure": ["advertising operations"]
+    },
+    "complexity": {"assessment": "多动作依赖和库存效率权衡；结果归因仍需拆分。", "supporting_claim_ids": ["C-003", "C-004"]},
+    "leadership_scope": {"level": "cross_functional_coordinator", "supporting_claim_ids": ["C-003"]},
+    "core_competencies": ["inventory and supply chain"],
+    "supporting_competencies": ["data and analytics", "project management"],
+    "exposure_only": ["advertising operations"],
+    "evidence_gaps": ["缺少人员管理证据", "缺少完整利润责任证据", "库存结果的独立驱动尚未拆分"]
+  },
+  "positioning": {
+    "current": {
+      "role_family": "Amazon Operations Specialist",
+      "rationale": "证据支持产品组复盘、库存治理机制和跨角色协调。",
+      "supporting_claim_ids": ["C-001", "C-003", "C-004"]
+    },
+    "stretch": {
+      "role_family": "Amazon Operations Lead",
+      "rationale": "具备组合层机制和协调证据，但领导与经营责任尚不完整。",
+      "supporting_claim_ids": ["C-003", "C-004"],
+      "evidence_gaps": ["正式或非正式带人证据", "更完整的利润与资源决策责任"]
+    },
+    "unsupported": [
+      {"role_family": "Amazon Operations Manager", "reasons": ["无人员管理证据", "无招聘或绩效管理证据"]}
+    ]
+  },
+  "positioning_narrative": "一名以库存治理和经营复盘为核心证据、具备组合层例外管理与跨角色协调经验的 Amazon 运营候选人，正在从专业执行走向更完整的业务所有权。"
+}

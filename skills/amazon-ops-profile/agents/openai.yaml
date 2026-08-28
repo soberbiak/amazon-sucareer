@@ -1,0 +1,4 @@
+interface:
+  display_name: "Amazon Ops Profile"
+  short_description: "Derive evidence-backed career positioning"
+  default_prompt: "基于 Career Evidence Ledger 分析我的 current、stretch 和 unsupported 定位，不创造新证据。"

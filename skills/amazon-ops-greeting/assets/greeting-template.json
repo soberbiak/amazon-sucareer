@@ -1,0 +1,21 @@
+{
+  "target_role": "亚马逊高级运营",
+  "candidate_name": "顾青屿",
+  "years_exp": 3,
+  "site": "北美站",
+  "platform": "boss",
+  "tone": "safe",
+  "company": "",
+  "jd_summary": "",
+  "highlights": [
+    "负责年销2000万产品组合的周度经营复盘",
+    "ACoS从32.4%降至28.1%，下降4.3个百分点",
+    "建立库存健康例外管理机制，高龄库存占比下降8.5个百分点"
+  ],
+  "contact": {
+    "phone": "138-0000-0000",
+    "email": "experienced-fictional@example.test"
+  },
+  "referrer": "",
+  "output_versions": ["safe", "aggressive"]
+}
