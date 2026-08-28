@@ -43,11 +43,9 @@ Amazon 运营求职材料常常散落在旧简历、周报、复盘、广告报�
 
 ## 下载
 
-推荐从 [GitHub Releases](https://github.com/soberbiak/amazon-sucareer/releases) 获取最新发布版本。
+推荐从 [GitHub Releases](https://github.com/soberbiak/amazon-sucareer/releases) 获取版本化发布包。普通使用者请优先下载 Release Assets 中的 `amazon-sucareer-*.zip`；GitHub 自动生成的 `Source code (zip)` / `Source code (tar.gz)` 主要用于查看对应版本的源码快照。
 
-当前预发布版本：`v0.3.0-alpha.6`
-
-普通使用者请优先下载 Release Assets 中的 `amazon-sucareer-*.zip`；GitHub 自动生成的 `Source code (zip)` / `Source code (tar.gz)` 主要用于查看对应版本的源码快照。
+`main` 是持续开发分支，可能包含尚未进入 Release 的文档、测试或功能修改；需要稳定、可复现的安装内容时，请以对应 Release / Tag 为准。
 
 ## 工作方式
 
@@ -241,7 +239,7 @@ Open HTML → 检查内容、字号、照片与预览线 → Print / 打印 → 
 
 仓库根目录包含 `.codex-plugin/plugin.json`，各 Skill 位于 `skills/` 下。推荐方式：
 
-1. 前往 [Releases](https://github.com/soberbiak/amazon-sucareer/releases) 下载最新版本的 `amazon-sucareer-*.zip`，或 clone 本仓库；
+1. 普通使用者前往 [Releases](https://github.com/soberbiak/amazon-sucareer/releases) 下载版本化的 `amazon-sucareer-*.zip`；需要参与开发时再 clone `main`；
 2. 保持目录结构完整，不要只复制单个模板或单个 `SKILL.md`；
 3. 在支持 Codex Skills / plugin manifest 的运行环境中，将仓库根目录作为插件或 Skill 来源加载；
 4. 加载成功后，以 `$amazon-ops-evidence`、`$amazon-ops-resume` 等名称调用。
@@ -255,16 +253,19 @@ Open HTML → 检查内容、字号、照片与预览线 → Print / 打印 → 
 ```text
 amazon-ops-career-skills/
 ├── .codex-plugin/       # 插件元数据
+├── .github/             # CI 与 Issue / PR 模板
 ├── docs/                # 上手说明与设计原则
 ├── examples/            # 从零合成的 fixtures
+├── licenses/            # 上游 / 第三方许可文本
 ├── shared/              # 全部 Skill 共用且唯一的规则来源
 ├── skills/              # 七个可调用 Skill
 ├── tests/               # 标准库回归测试
+├── CHANGELOG.md         # 版本变更记录
 ├── CONTRIBUTING.md      # 贡献流程与内容边界
 ├── PRIVACY.md           # 公开数据与隐私规则
 ├── ACKNOWLEDGEMENTS.md  # 致谢、来源与商标说明
 ├── NOTICE.md            # 上游来源与许可边界
-└── LICENSE              # MIT
+└── LICENSE              # 本项目 MIT License
 ```
 
 ## 示例、隐私与安全
@@ -293,14 +294,14 @@ python3 skills/amazon-ops-resume/scripts/build_resume.py \
 python3 skills/amazon-ops-interview/scripts/score_session.py \
   examples/fictional-interview/session.json
 
-python3 -m unittest tests/test_alpha5.py
+python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-提交前还应确认所有 Markdown 相对链接有效、`.codex-plugin/plugin.json` 合法，且压缩包中没有 `.DS_Store`、`__MACOSX`、`__pycache__` 或 `.pyc` 文件。
+GitHub Actions 会在 push 到 `main` 和 Pull Request 上自动执行核心验证。提交前还应确认所有 Markdown 相对链接有效、`.codex-plugin/plugin.json` 合法，且压缩包中没有 `.DS_Store`、`__MACOSX`、`__pycache__` 或 `.pyc` 文件。
 
 ## 当前状态与边界
 
-`0.3.0-alpha.6` 已完成：
+当前 alpha 版本已完成：
 
 - Evidence → Reframing → Profile 的核心链路；
 - 统一 Ledger v2.0 与共享规则；
@@ -310,6 +311,8 @@ python3 -m unittest tests/test_alpha5.py
 - 平台化求职开场语生成。
 
 仍处于 alpha 的部分：JD Mapping 与 Resume Audit 目前为轻量实现；不同客户端加载 Skill / plugin manifest 的具体 UI 可能不同；浏览器和打印机驱动的差异仍可能影响最终 PDF，需要在打印预览中确认。
+
+版本变化见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 贡献
 
@@ -325,4 +328,4 @@ python3 -m unittest tests/test_alpha5.py
 
 ## 许可
 
-本项目基于 [MIT License](LICENSE) 发布。
+本项目基于 [MIT License](LICENSE) 发布；适用的上游 / 第三方许可文本保存在 [`licenses/`](licenses/) 中。
