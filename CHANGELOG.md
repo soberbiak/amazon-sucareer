@@ -5,6 +5,9 @@ All notable changes to this project are documented here.
 ## [Unreleased]
 
 ### Changed
+- Resume templates now share one deep teal accent system across campus and experienced modes.
+- Added `compact` / `standard` / `comfortable` density controls, persisted with the editable HTML state.
+- Photo headers now keep the left information group vertically centered against the right portrait.
 - Repository regression tests are now version-aware instead of being tied to a specific alpha release.
 - Root licensing and preserved upstream licensing are separated more clearly.
 - CI now validates fixtures, builders, scoring, and regression tests on pushes and pull requests.

@@ -41,4 +41,5 @@
 - Body text remains readable at print size.
 - Dates and locations align consistently.
 - No clipped content, orphan headings, or large unused gaps.
+- The selected density matches the intent: `compact` only for one-page priority, `standard` by default, and `comfortable` when section rhythm is more valuable than maximum density.
 - Links work in the exported PDF when included.

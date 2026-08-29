@@ -11,6 +11,7 @@ from pathlib import Path
 
 REQUIRED = {"mode", "name", "target_role", "contact", "summary", "skills", "sections"}
 MODES = {"campus", "experienced"}
+DENSITIES = {"compact", "standard", "comfortable"}
 TERMINAL_PUNCTUATION = ("。", "；")
 
 
@@ -114,6 +115,9 @@ def render(data: dict[str, object], template: str) -> str:
     mode = data["mode"]
     if mode not in MODES:
         raise ValueError("mode must be 'campus' or 'experienced'")
+    density = data.get("layout_density", "standard")
+    if density not in DENSITIES:
+        raise ValueError("layout_density must be 'compact', 'standard', or 'comfortable'")
 
     contact = ensure_string_list(data["contact"], "contact")
     summary = ensure_string_list(data["summary"], "summary")
@@ -199,7 +203,11 @@ def render(data: dict[str, object], template: str) -> str:
         footer = '<div class="demo-note">全合成演示样例 · 不对应任何真实候选人、公司或商业数据</div>'
 
     content = identity + summary_html + skills_html + ''.join(rendered_sections) + footer
-    return template.replace("{{TITLE}}", esc(data["name"])).replace("{{CONTENT}}", content)
+    return (
+        template.replace("{{TITLE}}", esc(data["name"]))
+        .replace("{{DENSITY}}", density)
+        .replace("{{CONTENT}}", content)
+    )
 
 
 def main() -> int:

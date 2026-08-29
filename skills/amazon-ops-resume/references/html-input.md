@@ -6,6 +6,7 @@ The builder expects UTF-8 JSON:
 {
   "fictional": true,
   "mode": "experienced",
+  "layout_density": "standard",
   "name": "Example Name",
   "target_role": "Amazon Operations",
   "contact": ["City", "email@example.test"],
@@ -27,4 +28,4 @@ The builder expects UTF-8 JSON:
 }
 ```
 
-Required fields are `mode`, `name`, `target_role`, `contact`, `summary`, `skills`, and `sections`. `mode` must be `campus` or `experienced`. The builder escapes all input text and does not accept raw HTML.
+Required fields are `mode`, `name`, `target_role`, `contact`, `summary`, `skills`, and `sections`. `mode` must be `campus` or `experienced`. `layout_density` is optional: `compact` prioritizes one page, `standard` is the default, and `comfortable` increases major-section spacing. The builder escapes all input text and does not accept raw HTML.

@@ -53,6 +53,10 @@ class RepositoryContract(unittest.TestCase):
             self.assertIn("identity--plain", template)
             self.assertIn("identity--photo", template)
             self.assertIn("portrait-picker", template)
+            self.assertIn('data-control="density"', template)
+            self.assertIn('data-density="{{DENSITY}}"', template)
+            self.assertIn('body[data-density="comfortable"]', template)
+            self.assertIn("--accent: #176b87", template)
 
     def test_clean_frontend_uses_new_surface_contract(self) -> None:
         forbidden_tokens = [
@@ -198,6 +202,21 @@ class RepositoryContract(unittest.TestCase):
             resume = json.loads(path.read_text(encoding="utf-8"))
             for line in resume["summary"]:
                 self.assertFalse(line.endswith(("。", "；")), path.as_posix())
+
+    def test_resume_density_is_rendered(self) -> None:
+        script_path = ROOT / "skills/amazon-ops-resume/scripts/build_resume.py"
+        spec = importlib.util.spec_from_file_location("resume_builder", script_path)
+        self.assertIsNotNone(spec)
+        self.assertIsNotNone(spec.loader)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        data = json.loads((ROOT / "examples/fictional-campus/resume.json").read_text(encoding="utf-8"))
+        data["layout_density"] = "comfortable"
+        template = (ROOT / "skills/amazon-ops-resume/assets/templates/campus.html").read_text(encoding="utf-8")
+        self.assertIn('data-density="comfortable"', module.render(data, template))
+        data["layout_density"] = "invalid"
+        with self.assertRaises(ValueError):
+            module.render(data, template)
 
     def test_emphasis_is_safe_and_example_bullets_follow_the_contract(self) -> None:
         script_path = ROOT / "skills/amazon-ops-resume/scripts/build_resume.py"

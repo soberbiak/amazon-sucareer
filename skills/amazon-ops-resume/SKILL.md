@@ -61,7 +61,7 @@ Do not infer seniority from years alone. Route with three inputs:
 6. Draft a plain-text resume before layout. Keep the evidence layer strict and the candidate-facing layer confident.
 7. Read and apply [references/resume-expression-contract.md](references/resume-expression-contract.md). Write one main idea per bullet, keep candidate-facing text concise, and use only approved evidence-backed bold anchors while the ledger retains full metric and attribution context.
 8. Run [references/content-boundaries.md](references/content-boundaries.md) and [references/resume-qa.md](references/resume-qa.md).
-9. If HTML is requested, use the original templates under `assets/templates/` and the local builder. Do not add a portrait unless the user explicitly asks.
+9. If HTML is requested, use the original templates under `assets/templates/` and the local builder. Select `compact` only for explicit one-page priority; use `standard` by default and `comfortable` when visual breathing room matters. Do not add a portrait unless the user explicitly asks.
 
 ## Output contract
 
