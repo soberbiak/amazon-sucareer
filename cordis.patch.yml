@@ -1,0 +1,3 @@
+# This package is a skill bundle. Skills are discovered from a skill root, so
+# enabling the DSH bundle must not add or modify any profile plugin rows.
+[]

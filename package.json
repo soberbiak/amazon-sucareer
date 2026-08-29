@@ -1,0 +1,48 @@
+{
+  "name": "@soberbiak/amazon-sucareer",
+  "version": "0.3.0-alpha.6",
+  "description": "Evidence-first Amazon marketplace operations career skills for Codex, Claude Code, and DeepSeek Harness.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soberbiak/amazon-sucareer.git"
+  },
+  "homepage": "https://github.com/soberbiak/amazon-sucareer#readme",
+  "bugs": {
+    "url": "https://github.com/soberbiak/amazon-sucareer/issues"
+  },
+  "keywords": [
+    "amazon-operations",
+    "career",
+    "codex",
+    "claude-code",
+    "deepseek-harness",
+    "dsh-plugin",
+    "resume",
+    "skill"
+  ],
+  "files": [
+    "skills/",
+    ".codex-plugin/",
+    "cordis.patch.yml",
+    "install.sh",
+    "install.ps1",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md",
+    "ACKNOWLEDGEMENTS.md",
+    "PRIVACY.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
